@@ -62,6 +62,7 @@ class PostReportView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         queryset = Report.objects.filter(post=post)
+        print(queryset)
 
         # 로그인 O
         # # 이미 신고한 사용자 → 신고 X
@@ -78,7 +79,7 @@ class PostReportView(APIView):
         report.save()
 
         # 신고 3번 → 단어 삭제
-        if queryset.count() == 2:
+        if queryset.count() == 3:
             post.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
 
