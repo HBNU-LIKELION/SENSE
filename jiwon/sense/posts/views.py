@@ -14,6 +14,12 @@ class PostListView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostListRetrieveModelSerializer
 
+# 단어 총 개수 가져오기
+class PostCountView(APIView):
+    def get(self, request):
+        post_count = Post.objects.all().count()
+        return Response({'post_count': post_count}, status=status.HTTP_200_OK)
+
 # 단어 상세보기
 class PostRetrieveView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
