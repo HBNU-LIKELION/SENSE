@@ -59,7 +59,7 @@ class PostReportView(APIView):
         try:
             post = Post.objects.get(id=pk)
         except Post.DoesNotExist:
-            return Response({'detail': 'Not Found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         queryset = Report.objects.filter(post=post)
 
@@ -80,6 +80,6 @@ class PostReportView(APIView):
         # 신고 3번 → 단어 삭제
         if queryset.count() == 2:
             post.delete()
-            return Response({'result': 'Deleted Post Successfully'}, status=status.HTTP_204_NO_CONTENT)
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
-        return Response({'result': 'Reported Post Successfully'}, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_201_CREATED)

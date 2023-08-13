@@ -12,4 +12,4 @@ class Post(models.Model):
 
 class Report(models.Model):
     post = models.ForeignKey(to=Post, on_delete=models.CASCADE)
-    writer = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    writer = models.ForeignKey(to=User, on_delete=models.CASCADE, null=True, blank=True)
