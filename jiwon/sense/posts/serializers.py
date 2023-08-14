@@ -14,7 +14,7 @@ class ReportBaseModelserializer(ModelSerializer):
 
 class PostListRetrieveModelSerializer(PostBaseModelSerializer):
     class Meta(PostBaseModelSerializer.Meta):
-        fields = ['id', 'word', 'meaning', 'writer']
+        fields = ['id', 'word', 'meaning', 'writer', 'prev_id', 'next_id']
         depth = 1
 
 class PostCreateModelSerializer(PostBaseModelSerializer):

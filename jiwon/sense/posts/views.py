@@ -84,20 +84,6 @@ class PostCreateView(generics.CreateAPIView):
             cur_post.next_id = cur_post.id
             cur_post.save()
 
-        # # 이전/다음 단어 업데이트하기
-        # if prev_post:
-        #     cur_id = Post.objects.only('id').latest('id').id
-
-        #     # 처음 단어 업데이트하기
-        #     first_post = Post.objects.earliest('id')
-        #     first_post.prev_id = cur_id
-        #     first_post.save()
-
-        # if Post.objects.all().count() > 2:
-        #     # 이전 단어 업데이트하기
-        #     prev_post.next_id = cur_id
-        #     prev_post.save()
-
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
