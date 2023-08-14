@@ -19,6 +19,16 @@ class PostCountView(APIView):
     def get(self, request):
         post_count = Post.objects.all().count()
         return Response({'post_count': post_count}, status=status.HTTP_200_OK)
+    
+# 첫 번째 단어 ID 가져오기
+class FirstPostIdView(APIView):
+    def get(self, request):
+        try:
+            first_post_id = Post.objects.only('id').earliest('id').id
+        except Post.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        return Response({'first_post_id': first_post_id}, status=status.HTTP_200_OK)
 
 # 단어 상세보기
 class PostRetrieveView(generics.RetrieveAPIView):
@@ -33,7 +43,7 @@ class PostCreateView(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         try:
             Post.objects.get(word=request.data['word'])
-            return Response({'result': 'Already Existed'})
+            return Response({'result': 'Already Existed'}, status=status.HTTP_400_BAD_REQUEST)
         except Post.DoesNotExist:
             return self.create(request, *args, **kwargs)
 

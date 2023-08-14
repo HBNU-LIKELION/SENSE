@@ -19,4 +19,4 @@ class PostListRetrieveModelSerializer(PostBaseModelSerializer):
 
 class PostCreateModelSerializer(PostBaseModelSerializer):
     class Meta(PostBaseModelSerializer.Meta):
-        fields = ['word', 'meaning']
+        fields = ['id', 'word', 'meaning', 'prev_id', 'next_id']

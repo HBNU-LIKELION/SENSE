@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
+    'allauth.socialaccount.providers.kakao',
     'posts',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
+
+# KAKAO
+import os
+import json
+
+secret_file = os.path.join(BASE_DIR, "secrets.json")
+secrets = None
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+SECRET_KEY = secrets['SECRET_KEY']
+
+SOCIAL_OUTH_CONFIG = {
+    'KAKAO_REST_API_KEY': secrets['KAKAO_REST_API_KEY'],
+    "KAKAO_REDIRECT_URI": secrets['KAKAO_REDIRECT_URI'],
+    "KAKAO_SECRET_KEY": secrets['KAKAO_SECRET_KEY'],
+    "KAKAO_ADMIN_KEY": secrets['KAKAO_ADMIN_KEY'],
+    "KAKAO_LOGOUT_REDIRECT_URI": secrets['KAKAO_LOGOUT_REDIRECT_URI'],
+}
+
+# Login - Setting
+SITE_ID = 1

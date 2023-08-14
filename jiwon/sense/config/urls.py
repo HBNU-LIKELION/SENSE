@@ -22,6 +22,8 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from accounts.views import get_user_info, kakao_get_login, kakao_logout, logout_with_kakao, KakaoUserCreateView, KakaoUserListView
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Snippets API",
@@ -41,6 +43,8 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
     path('admin/', admin.site.urls),
+
+    path('accounts/', include('accounts.urls', namespace='accounts')),
 
     path('posts/', include('posts.urls', namespace='posts')),
 ]
