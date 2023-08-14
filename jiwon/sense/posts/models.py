@@ -9,6 +9,8 @@ class Post(models.Model):
     meaning = models.TextField(verbose_name='의미')
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
     writer = models.ForeignKey(to=User, on_delete=models.CASCADE, null=True, blank=True)
+    prev_id = models.IntegerField(verbose_name='이전 단어 ID', null=True, blank=True)
+    next_id = models.IntegerField(verbose_name='다음 단어 ID', null=True, blank=True)
 
 class Report(models.Model):
     post = models.ForeignKey(to=Post, on_delete=models.CASCADE)
